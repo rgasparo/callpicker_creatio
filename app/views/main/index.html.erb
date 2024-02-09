@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <div class='head'>
+      <figure>
+        <img src="https://clikauto.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.f337b21c.png&w=828&q=75"  class="figure-img img-fluid rounded">
+      </figure>     
+    </div>
+
+
+    <div class='formContainer'>
+        <div class='form'>
+          <h3 class='title'>Ingresa el número de teléfono:</h3>
+        <%= form_with(model: @lead, local: true) do |form| %>
+          <div class="field">
+            <%= form.telephone_field :phone, placeholder: 'xxx-xxx-xxxx',class: 'lebel form-control' %>
+
+          </div>
+          <div class="actions">
+            <%= form.submit 'Buscar Lead', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+  </body>
+</html>

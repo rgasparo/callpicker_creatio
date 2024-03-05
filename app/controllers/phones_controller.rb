@@ -34,10 +34,11 @@ class PhonesController < ApplicationController
 
       @arrayVentas = []
       @arrayTomas = []
+      @arrayLeadName = []
       @obj = {}
   
         @phone_number = params[:phone]
-        url_string = "https://clikauto.creatio.com/0/odata/ClikAutoRepositorio?%24filter=contains(ClikAutoTelefonoMovil%2C%27#{@phone_number}%27)&%24orderby=CreatedOn%20desc"
+        url_string = "https://clikauto.creatio.com/0/odata/Lead?$count=true&$filter=MobilePhone%20eq%20%27#{@phone_number}%27"
   
         headers = {
           'Cookie' => @cookies_string,
@@ -52,12 +53,14 @@ class PhonesController < ApplicationController
   
           if count_results > 0
             @obj['value'].each do |item|
-              if item['ClikAutoLeadRelatedId'] != "00000000-0000-0000-0000-000000000000"
-                if item['ClikAutoNecesidadCliente'].include?("venta")
-                  @arrayVentas << item['ClikAutoLeadRelatedId'] unless @arrayVentas.include?(item['ClikAutoLeadRelatedId'])
-                else
-                  @arrayTomas << item['ClikAutoLeadRelatedId'] unless @arrayTomas.include?(item['ClikAutoLeadRelatedId'])
-                end
+              if item['Id'] != "00000000-0000-0000-0000-000000000000"
+                @arrayVentas << item['Id'] unless @arrayVentas.include?(item['Id'])
+                @arrayLeadName << item['LeadName'] unless @arrayVentas.include?(item['LeadName'])
+                # if item['LeadName'].include?('Venta')
+                #   @arrayVentas << item['Id'] unless @arrayVentas.include?(item['Id'])
+                # else
+                #   @arrayTomas << item['Id'] unless @arrayTomas.include?(item['Id'])
+                # end
               end
             end
           end

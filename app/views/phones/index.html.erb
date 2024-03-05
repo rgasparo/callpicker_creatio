@@ -31,7 +31,7 @@
     <div class='listContainer'>
 
       <% count_results_ventas = @arrayVentas.count %>
-      <% count_results_tomas = @arrayTomas.count %>
+      <% count_results_leadName = @arrayLeadName.count %>
 
       <% if @phone_number %>
 
@@ -47,19 +47,24 @@
           </tr>
         </thead>
         <tbody>
-        <% if count_results_ventas > 0 && count_results_tomas > 0 %>
-            <% @arrayVentas.each do |value| %>
+        <% if count_results_ventas > 0 %>
+            <% @arrayVentas.each_with_index do |value, index| %>
               <tr>
-                <td>Ventas</td>
-                <td><a target='blank_' href="https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/ClikAutoLead1Page/edit/<%= value %>">Lead ventas</a></td>
+                <td><%= @arrayLeadName[index] %></td>
+                <td><a target='_blank' href="https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/ClikAutoLead1Page/edit/<%= value %>">Ver lead</a></td>
               </tr>
             <% end %>
+
+            <%#  /////////////////  Disabled TOMAS /////////////////  %>
+
             <% @arrayTomas.each do |value| %>
               <tr>
                 <td>Tomas</td>
                 <td><a target='blank_' href="https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/LeadPageV2/edit/<%= value %>">Lead Tomas</a></td>
               </tr>
             <% end %>
+            <%#  //////////////////////////////////  %>
+
           <% elsif count_results_ventas > 0 && count_results_tomas == 0 %>
             <% if count_results_ventas == 1 %>
               <% redirect_to "https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/ClikAutoLead1Page/edit/#{@arrayVentas[0]}" %>
@@ -67,11 +72,12 @@
               <% @arrayVentas.each do |value| %>
                 <tr>
                   <td>Ventas</td>
-                  <td><a href="https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/ClikAutoLead1Page/edit/<%= value %>">Lead ventas</a></td>
+                  <td><a target='blank_' href="https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/ClikAutoLead1Page/edit/<%= value %>">Lead ventas</a></td>
                 </tr>
               <% end %>
             <% end %>
           <% else %>
+          <%#  /////////////////  Disabled TOMAS /////////////////  %>
             <% if count_results_tomas == 1 %>
               <% redirect_to "https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/LeadPageV2/edit/#{@arrayTomas[0]}" %>
             <% elsif count_results_tomas == 0 %>

@@ -37,7 +37,7 @@
 
         <div class='listTitle'>
          
-         <h4>Leads encontrados:</h4>
+         <h4>Leads encontrados <%=count_results_ventas%> :</h4>
 
         <table class="table table-hover">
         <thead>
@@ -57,45 +57,19 @@
 
             <%#  /////////////////  Disabled TOMAS /////////////////  %>
 
-            <% @arrayTomas.each do |value| %>
-              <tr>
-                <td>Tomas</td>
-                <td><a target='blank_' href="https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/LeadPageV2/edit/<%= value %>">Lead Tomas</a></td>
-              </tr>
-            <% end %>
             <%#  //////////////////////////////////  %>
 
-          <% elsif count_results_ventas > 0 && count_results_tomas == 0 %>
-            <% if count_results_ventas == 1 %>
-              <% redirect_to "https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/ClikAutoLead1Page/edit/#{@arrayVentas[0]}" %>
-            <% else %>
-              <% @arrayVentas.each do |value| %>
-                <tr>
-                  <td>Ventas</td>
-                  <td><a target='blank_' href="https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/ClikAutoLead1Page/edit/<%= value %>">Lead ventas</a></td>
-                </tr>
-              <% end %>
-            <% end %>
-          <% else %>
+
           <%#  /////////////////  Disabled TOMAS /////////////////  %>
-            <% if count_results_tomas == 1 %>
-              <% redirect_to "https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/LeadPageV2/edit/#{@arrayTomas[0]}" %>
-            <% elsif count_results_tomas == 0 %>
+            <% if count_results_ventas == 0 %>
               <tr>
                 <td colspan="2">
                   <p class="noEncontrado">No encontramos registros en el repositorio en Creatio, con este número <%= @phone_number %>, intenta buscarlo desde la sección de <a target='blank_' href='https://clikauto.creatio.com/0/Nui/ViewModule.aspx#SectionModuleV2/LeadSectionV2' >Leads</a></p>
                 </td>
               </tr>
-            <% else %>
-              <% @arrayTomas.each do |value| %>
-                <tr>
-                  <td>Tomas</td>
-                  <td><a target='blank_' href="https://clikauto.creatio.com/0/Nui/ViewModule.aspx#CardModuleV2/LeadPageV2/edit/<%= value %>">Lead Tomas</a></td>
-                </tr>
-              <% end %>
             <% end %>
 
-        <% end %>
+            <% end %>
         </tbody>
         </table>
 
